@@ -1,8 +1,10 @@
 import { addDoc, collection } from 'firebase/firestore';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { auth, db } from '../../service/firebase/firebase';
+import { AppContext } from '../../context/AppContext';
 
 export default function FormRecordIncome() {
+  const { isCreated, setIsCreated } = useContext(AppContext);
   const [incomeData, setIncomeData] = useState({
     incomeName: '',
     amount: '',
@@ -42,6 +44,7 @@ export default function FormRecordIncome() {
         incomeName: '',
         amount: '',
       });
+      setIsCreated(!isCreated);
       console.info('Receitas registrada com sucesso!');
     } catch (error) {
       console.error('Erro ao registrar receitas:', error);

@@ -2,18 +2,18 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { signOut } from 'firebase/auth';
 import { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import AvatarDefault from '../assets/avatar-user-svgrepo-com.svg';
+import ExpensesTrack from '../components/ExpensesTrack';
 import ExpenseForm from '../components/Forms/FormExpense';
+import FormRecordIncome from '../components/Forms/FormRecordIncome';
 import { AuthContext } from '../context/AuthContext';
 import { auth } from '../service/firebase/firebase';
-import FormRecordIncome from '../components/Forms/FormRecordIncome';
-import BalanceSummary from '../components/BalanceSummary';
 
 export default function Dashboard() {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
-  // const { setOpenModal } = useContext(AppContext);
+
   const handleLogout = async () => {
     try {
       await signOut(auth);
@@ -35,7 +35,7 @@ export default function Dashboard() {
         <Dialog.Portal>
           <Dialog.Overlay className="bg-blackA6 data-[state=open]:animate-overlayShow fixed inset-0" />
           <Dialog.Content
-            className="data-[state=open]:animate-contentShow fixed top-[50%] 
+            className="data-[state=open]:animate-contentShow fixed top-[50%] z-50
           left-[50%] max-h-[85vh] w-[90vw] max-w-[700px] translate-x-[-50%] translate-y-[-50%]
           rounded-[6px] bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none"
           >
@@ -71,7 +71,7 @@ export default function Dashboard() {
         <Dialog.Portal>
           <Dialog.Overlay className="bg-blackA6 data-[state=open]:animate-overlayShow fixed inset-0" />
           <Dialog.Content
-            className="data-[state=open]:animate-contentShow fixed top-[50%] 
+            className="data-[state=open]:animate-contentShow fixed top-[50%] z-50
           left-[50%] max-h-[85vh] w-[90vw] max-w-[700px] translate-x-[-50%] translate-y-[-50%]
           rounded-[6px] bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none"
           >
@@ -97,30 +97,29 @@ export default function Dashboard() {
   };
   return (
     <>
-      {/* <ExpenseRegisterModal /> */}
       <div className="h-screen w-full">
         <div className="container m-auto pt-5">
           <h1 className="text-center text-3xl font-semibold">Dashboard</h1>
-          <div className="flex items-center gap-2">
-            <img
-              className="w-20 h-20 rounded-full"
-              src={`${user?.avatar ? user.avatar : AvatarDefault}`}
-              alt="Foto do usuário"
-            />
-            <p className="font-semibold">{user?.name}</p>
+          <div className="flex items-center justify-around md:justify-between">
+            <div className="flex items-center gap-2">
+              <img
+                className="w-20 h-20 rounded-full"
+                src={`${user?.avatar ? user.avatar : AvatarDefault}`}
+                alt="Foto do usuário"
+              />
+              <p className="font-semibold">{user?.name}</p>
+            </div>
+            <div className="flex justify-around">
+              <button type="button" onClick={handleLogout}>
+                Sair
+              </button>
+            </div>
           </div>
-          <div className="flex justify-around">
-            <button type="button" onClick={handleLogout}>
-              Sair
-            </button>
-            {/* <button type="button" onClick={() => setOpenModal(true)}>
-              Registrar Despesas
-            </button> */}
-            <ExpenseRegisterModal />
+          <div className="flex justify-center md:justify-start gap-x-2 mt-10">
             <RecordIncomeModal />
-            <Link to="/my-expenses">Minhas despesas</Link>
+            <ExpenseRegisterModal />
           </div>
-          <BalanceSummary />
+          <ExpensesTrack />
         </div>
       </div>
     </>

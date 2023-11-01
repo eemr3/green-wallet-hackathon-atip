@@ -1,8 +1,10 @@
 import { addDoc, collection } from 'firebase/firestore';
 import { db, auth } from '../../service/firebase/firebase';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { AppContext } from '../../context/AppContext';
 
 const ExpenseForm = () => {
+  const { isCreated, setIsCreated } = useContext(AppContext);
   const [expenseData, setExpenseData] = useState({
     productName: '',
     amount: '',
@@ -31,7 +33,7 @@ const ExpenseForm = () => {
         throw new Error('Usuário não autenticado');
       }
       const id = user.uid;
-      console.log('ID do usuário:', id);
+
       const expense = {
         productName: expenseData.productName,
         amount: parseFloat(expenseData.amount),
@@ -40,7 +42,6 @@ const ExpenseForm = () => {
         userId: id,
         timestamp: new Date(),
       };
-      console.log('Despesa:', expense);
       await addDoc(expesneRef, expense);
 
       setExpenseData({
@@ -49,6 +50,7 @@ const ExpenseForm = () => {
         category: 'Alimentação',
         isEcoFriendly: false,
       });
+      setIsCreated(!isCreated);
       console.info('Despesa registrada com sucesso!');
     } catch (error) {
       console.error('Erro ao registrar despesa:', error);
