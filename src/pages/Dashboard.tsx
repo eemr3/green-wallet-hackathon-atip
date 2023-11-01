@@ -8,6 +8,7 @@ import ExpenseForm from '../components/Forms/FormExpense';
 import { AuthContext } from '../context/AuthContext';
 import { auth } from '../service/firebase/firebase';
 import FormRecordIncome from '../components/Forms/FormRecordIncome';
+import BalanceSummary from '../components/BalanceSummary';
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -119,6 +120,7 @@ export default function Dashboard() {
             <RecordIncomeModal />
             <Link to="/my-expenses">Minhas despesas</Link>
           </div>
+          <BalanceSummary />
         </div>
       </div>
     </>

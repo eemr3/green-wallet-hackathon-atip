@@ -1,6 +1,3 @@
-import { useContext } from 'react';
-import { AppContext } from '../../context/AppContext';
-
 import * as Dialog from '@radix-ui/react-dialog';
 import { Cross2Icon } from '@radix-ui/react-icons';
 
