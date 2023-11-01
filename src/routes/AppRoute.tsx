@@ -4,6 +4,7 @@ import { AuthContext } from '../context/AuthContext';
 import Dashboard from '../pages/Dashboard';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
+import ExpenseList from '../pages/MyExpenses';
 
 interface RouteElementProps {
   children: JSX.Element;
@@ -11,8 +12,8 @@ interface RouteElementProps {
 
 const Private = ({ children }: RouteElementProps) => {
   const { user } = useContext(AuthContext);
-
-  if (!user) {
+  const userLocalStorage = localStorage.getItem('user') || '';
+  if (!user && !userLocalStorage) {
     return <Navigate to="/" />;
   }
 
@@ -29,6 +30,14 @@ export default function AppRoute() {
         element={
           <Private>
             <Dashboard />
+          </Private>
+        }
+      />
+      <Route
+        path="/my-expenses"
+        element={
+          <Private>
+            <ExpenseList />
           </Private>
         }
       />
