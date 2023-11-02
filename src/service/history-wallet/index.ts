@@ -36,11 +36,13 @@ async function fetchExpenses() {
       };
       expenseList.push(expense);
     });
+
     return expenseList.map((expense) => {
       return {
         id: expense.id,
         name: expense.productName,
         amount: expense.amount,
+        isEcoFriendly: expense.isEcoFriendly,
         type: 'expense',
       };
     });
@@ -72,6 +74,7 @@ async function fetchIncomes() {
         id: income.id,
         name: income.incomeName,
         amount: income.amount,
+        isEcoFriendly: false,
         type: 'income',
       };
     });

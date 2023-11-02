@@ -23,7 +23,9 @@ export default function SignIn() {
         id: response.user.uid,
         name: response.user.displayName,
         avatar: response.user.photoURL,
+        email: response.user.email,
       });
+      localStorage.setItem('user', JSON.stringify(response.user));
       navigate('/dashboard');
     } catch (error) {
       console.error(error);
@@ -41,6 +43,7 @@ export default function SignIn() {
         id: response.user.uid,
         name: response.user.displayName,
         avatar: response.user.photoURL,
+        email: response.user.email,
       });
       localStorage.setItem('user', JSON.stringify(response.user));
       navigate('/dashboard');

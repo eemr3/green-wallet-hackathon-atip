@@ -9,6 +9,7 @@ import ExpenseForm from '../components/Forms/FormExpense';
 import FormRecordIncome from '../components/Forms/FormRecordIncome';
 import { AuthContext } from '../context/AuthContext';
 import { auth } from '../service/firebase/firebase';
+import { RxExit } from 'react-icons/rx';
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -99,7 +100,7 @@ export default function Dashboard() {
     <>
       <div className="h-screen w-full">
         <div className="container m-auto pt-5">
-          <h1 className="text-center text-3xl font-semibold">Dashboard</h1>
+          <h1 className="text-center text-3xl font-semibold text-green11">Dashboard</h1>
           <div className="flex items-center justify-around md:justify-between">
             <div className="flex items-center gap-2">
               <img
@@ -107,11 +108,16 @@ export default function Dashboard() {
                 src={`${user?.avatar ? user.avatar : AvatarDefault}`}
                 alt="Foto do usuário"
               />
-              <p className="font-semibold">{user?.name}</p>
+              <div className="flex flex-col">
+                <p className="font-semibold">{user?.name}</p>
+                <p className="text-sm text-gray-500">{user?.email}</p>
+              </div>
             </div>
             <div className="flex justify-around">
               <button type="button" onClick={handleLogout}>
-                Sair
+                <h1>
+                  <RxExit className="w-8 h-8 text-red-500" />
+                </h1>
               </button>
             </div>
           </div>

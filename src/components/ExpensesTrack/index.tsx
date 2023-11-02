@@ -7,11 +7,12 @@ import {
 } from '../../service/history-wallet';
 import { currencyFormat } from '../../service/currency-format';
 import { AppContext } from '../../context/AppContext';
-
+import { FaEdit, FaTrash } from 'react-icons/fa';
 interface IHistory {
   id: string;
   name: string;
   amount: number;
+  isEcoFriendly: boolean;
   type: string;
 }
 
@@ -21,7 +22,6 @@ export default function ExpensesTrack() {
   const [balance, setBalance] = useState<number>(0);
   const [totalExpenses, setTotalExpenses] = useState<number>(0);
   const [totalIncome, setTotalIncome] = useState<number>(0);
-  const [date, setDate] = useState(new Date());
 
   useEffect(() => {
     const getHistory = async () => {
@@ -48,14 +48,6 @@ export default function ExpensesTrack() {
     getHistory();
   }, [isCreated]);
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setDate(new Date());
-    }, 1000);
-
-    return () => clearInterval(intervalId);
-  }, []);
-
   return (
     <>
       <div className="bg-white">
@@ -67,15 +59,7 @@ export default function ExpensesTrack() {
             <div
               className="absolute inset-0 z-20 flex items-center justify-center h-full 
               bg-opacity-50"
-            >
-              <div className="flex justify-center h-full items-center fixed top-0">
-                <p className="text-gray-700 text-5xl lg:text-7xl">
-                  <span className="border-2 p-4 rounded-md" id="time">
-                    {date.toLocaleTimeString('pt-BR')}
-                  </span>
-                </p>
-              </div>
-            </div>
+            ></div>
           </div>
           <div className="col-span-12 sm:col-span-12 md:col-span-5 lg:col-span-4 xxl:col-span-4">
             <div>
@@ -116,9 +100,18 @@ export default function ExpensesTrack() {
                   >
                     <div>
                       <p>{item.name}</p>
+                      {item.type === 'expense' && (
+                        <p>Ecológico: {item.isEcoFriendly ? 'Sim' : 'Não'}</p>
+                      )}
                     </div>
                     <div>
                       <p>{currencyFormat(item.amount)}</p>
+                      {item.type === 'expense' && (
+                        <div className="flex justify-end gap-x-2 mt-1">
+                          <FaEdit className="text-green-500 cursor-pointer" />
+                          <FaTrash className="text-red-500 cursor-pointer" />
+                        </div>
+                      )}
                     </div>
                   </div>
                 ))}
