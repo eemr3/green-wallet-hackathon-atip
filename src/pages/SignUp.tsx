@@ -7,6 +7,7 @@ import {
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../service/firebase/firebase';
 import { useState } from 'react';
+import Logo from '../assets/logo-sustani.svg';
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -48,7 +49,12 @@ export default function SignUp() {
 
   return (
     <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
-      <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
+      <div className="flex w-full justify-center items-center flex-col">
+        <div className="w-[100px] h-[100px] md:w-[150px] md:h-[150px] bg-green-50 rounded-full mb-4">
+          <img src={Logo} alt="logo" />
+        </div>
+      </div>
+      <div className="w-full p-6 mt-10 mx-auto bg-white rounded-md shadow-xl lg:max-w-xl">
         <h1 className="text-3xl font-semibold text-center text-green-700 uppercase">
           Criar conta
         </h1>

@@ -100,7 +100,6 @@ export default function Dashboard() {
     <>
       <div className="h-screen w-full">
         <div className="container m-auto pt-5">
-          <h1 className="text-center text-3xl font-semibold text-green11">Dashboard</h1>
           <div className="flex items-center justify-around md:justify-between">
             <div className="flex items-center gap-2">
               <img
@@ -121,7 +120,7 @@ export default function Dashboard() {
               </button>
             </div>
           </div>
-          <div className="flex justify-center md:justify-start gap-x-2 mt-10">
+          <div className="flex justify-center md:justify-start gap-x-2 mt-10 mb-10 z-50">
             <RecordIncomeModal />
             <ExpenseRegisterModal />
           </div>

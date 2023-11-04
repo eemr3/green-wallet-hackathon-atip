@@ -8,6 +8,8 @@ import {
 import { currencyFormat } from '../../service/currency-format';
 import { AppContext } from '../../context/AppContext';
 import { FaEdit, FaTrash } from 'react-icons/fa';
+import Logo from '../../assets/logo-sustani.svg';
+
 interface IHistory {
   id: string;
   name: string;
@@ -52,14 +54,17 @@ export default function ExpensesTrack() {
     <>
       <div className="bg-white">
         <div className="grid grid-cols-12 gap-0 ">
-          <div
-            className="bg-fixed relative col-span-12 sm:col-span-12 md:col-span-7 
-            lg:col-span-8 xxl:col-span-8 hidden md:block"
-          >
-            <div
-              className="absolute inset-0 z-20 flex items-center justify-center h-full 
-              bg-opacity-50"
-            ></div>
+          <div className="bg-fixed relative col-span-12 sm:col-span-12 md:col-span-7 lg:col-span-8 xxl:col-span-8 hidden md:block">
+            <div className="absolute inset-0 flex items-center justify-center h-full bg-white">
+              <div className="flex justify-center h-full items-center fixed top-0">
+                <h2 className="text-green-600 text-5xl lg:text-2xl font-semibold">
+                  <div className="w-[300px] h-[300px] bg-green-50 rounded-full mb-4">
+                    <img src={Logo} alt="logo" />
+                  </div>
+                  CARTEIRA $USTAINI
+                </h2>
+              </div>
+            </div>
           </div>
           <div className="col-span-12 sm:col-span-12 md:col-span-5 lg:col-span-4 xxl:col-span-4">
             <div>
